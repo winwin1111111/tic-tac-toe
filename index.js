@@ -26,12 +26,11 @@ function initailizeGame(){
 function cellClicked(){
     const cellIndex = this.getAttribute("cellIndex");
 
-    if(options[cellIndex] != "" ||!running){
+    if(options[cellIndex] != "" || !running){
         return;
     }
 
     updateCell(this, cellIndex);
-    changePlayer();
     checkWinner();
 
 }
@@ -67,11 +66,16 @@ function checkWinner(){
         running = false;
     } else if (!options.includes("")){
         statusText.textContent = "Draw";
+        running = false;
     } else{
         changePlayer();
     }
 
 }
 function restartGame(){
-
+    currentPlayer = "X";
+    options = ["", "", "", "", "", "", "", "", ""];
+    statusText.textContent = `${currentPlayer}'s turn`;
+    cells.forEach(cell => cell.textContent = "");
+    running = true;
 }
